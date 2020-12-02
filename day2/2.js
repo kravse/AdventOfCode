@@ -1,4 +1,6 @@
-const inputs = require('./input.js');
+const fs = require('fs');
+const file = fs.readFileSync('./input.txt', 'UTF-8');
+const inputs = file.split(/\r?\n/);
 let cleanInputs = inputs.map(function(current) {
   current = current.split(" ");
   current[3] = current[3].slice(0, 1)
