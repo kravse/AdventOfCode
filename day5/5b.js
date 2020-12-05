@@ -12,8 +12,8 @@ const slicer = (rowsOrCols, sliceDirection) => {
   }
 }
 let seats = inputs.map((seat) => {
-  let rows = [0, ...Array(128).keys()].slice(1);
-  let cols = [0, ...Array(8).keys()].slice(1);
+  let rows = [...Array(128).keys()];
+  let cols = [...Array(8).keys()];
   for (i in seat) {
     if (i < 7) {
       rows = slicer(rows, seat[i])
