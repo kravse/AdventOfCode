@@ -37,8 +37,7 @@ function swap(val) {
   return success
 }
 
-while (true) {
-  if (!inputs[state.pos]) break;
+while (inputs[state.pos]) {
   if (loopState.visited.has(state.pos)) {
     state = new State();
     loopState = new LoopState();
