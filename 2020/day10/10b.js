@@ -1,35 +1,27 @@
+/*
+  I struggled a lot with this problem, overcomplicating it in so many ways.
+  I ended up browsing github for help, and came accross a ridiculously elegant solution
+  at https://github.com/valtism/advent-of-code-2020/blob/master/src/day10.js.
+
+  I learned from it, and used it to come up with this solution. Shoutout to @valtism.
+*/
+
 const fs = require('fs');
 const file = fs.readFileSync('./input.txt', 'UTF-8');
 const inputs = file.split(/\r?\n/)
 
-let adapters = inputs.map(e => Number(e))
-// let joltJumps = [];
-// let joltage = 0;
+const adapters = [...inputs.map(e => Number(e))].sort((a, b) => a - b)
 
-// let lowest = Math.min.apply(Math, adapters);
-// adapters.splice(adapters.indexOf(lowest), 1);
-// let counter = 0;
-let mySet = new Set();
-var myArray = ["cat", "dog", "snake"];
-
-// Just thinking things through here with what a recursive function would look like.
-let combos = (array) => {
-  for (var i = 0; i < myArray.length; i++) {
-    if (!mySet.has(myArray[i])) mySet.add(myArray[i])
-
-    for (var j = 0; j < myArray.length; j++) {
-      if (myArray[i] !== myArray[j]) {
-        if (!mySet.has(myArray[i] + myArray[j])) mySet.add(myArray[i] + myArray[j])
-
-        for (var k = 0; k < myArray.length; k++) {
-          if (myArray[i] !== myArray[j] && myArray[j] !== myArray[k]) {
-            if (!mySet.has(myArray[i] + myArray[j] + myArray[k])) mySet.add(myArray[i] + myArray[j] + myArray[k])
-          }
-        }
-      }
-    }
+const comboCount = () => {
+  let combos = {0: 1}
+  for (var i = 0; i < adapters.length; i++) {
+    let one = combos[adapters[i]-1] || 0;
+    let two = combos[adapters[i]-2] || 0;
+    let three = combos[adapters[i]-3] || 0;
+    combos[adapters[i]] = one + two + three
   }
-}
-combos(myArray)
-console.log(mySet);
-// console.log(numCount(1) * numCount(3))
+  return combos[Math.max.apply(Math, adapters)]
+};
+
+console.log(comboCount());
+
