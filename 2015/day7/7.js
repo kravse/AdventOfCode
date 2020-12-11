@@ -16,6 +16,7 @@ const bitwise = {
   RSHIFT: (a, b) =>  a>>b&0xFFFF,
   NOT: (a) => ~a&0xFFFF
 }
+
 const resolve = (wire) => {
   let lookup = commands.get(wire);
   if (isNaN(wire) === false) return wire
