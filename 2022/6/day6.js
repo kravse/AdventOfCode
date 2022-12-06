@@ -6,7 +6,7 @@ const stream = fs
 const pattern = /^(?:([A-Za-z])(?!.*\1))*$/;
 let count = 0;
 const messageMarker = [];
-const messageMarkerLen = 4;
+const messageMarkerLen = 14;
 
 /* part b */
 // let messageMarkerLen = 14;
@@ -17,12 +17,12 @@ stream.every((val) => {
   messageMarker.push(val);
   return messageMarker.length < messageMarkerLen
     ? true
-    : !pattern.test(messageMarker.join(""));
+    : [...new Set(messageMarker)].length !== messageMarkerLen;
 
   /* ...Or we can use sets
    *  return messageMarker.length < messageMarkerLen
    *  ? true
-   *  : [...new Set([...messageMarker])].length !== messageMarkerLen;
+   *  : [...new Set(messageMarker)].length !== messageMarkerLen;
    */
 });
 
