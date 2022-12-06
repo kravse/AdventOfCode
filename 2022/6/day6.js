@@ -17,7 +17,7 @@ stream.every((val) => {
   messageMarker.push(val);
   return messageMarker.length < messageMarkerLen
     ? true
-    : [...new Set(messageMarker)].length !== messageMarkerLen;
+    : !pattern.test(messageMarker.join(""));
 
   /* ...Or we can use sets
    *  return messageMarker.length < messageMarkerLen
