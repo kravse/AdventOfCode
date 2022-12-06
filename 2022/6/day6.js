@@ -18,6 +18,12 @@ stream.every((val) => {
   return messageMarker.length < messageMarkerLen
     ? true
     : !pattern.test(messageMarker.join(""));
+
+  /* ...Or we can use sets
+   *  return messageMarker.length < messageMarkerLen
+   *  ? true
+   *  : [...new Set([...messageMarker])].length !== messageMarkerLen;
+   */
 });
 
 console.log(count);
